@@ -1,0 +1,10 @@
+{
+    "verbose": true,
+    "watch": [
+        "ember-cli-build.js",
+        ".ember-cli",
+        ".eslintrc.js",
+        "bower.json",
+        "package.json"
+    ]
+}

@@ -1,0 +1,26 @@
+<div class="container">
+
+  <nav class="navbar">
+    <img src="/assets/images/logo.svg" alt="Telemark fylkeskommune logo">
+
+    <ul class="nav-items">
+      {{#link-to "search" class="nav-item" tagName="li"}}
+        {{#link-to "search" class="nav-link"}}
+          <i class="material-icons">person</i>
+          <span class="nav-item-name">Ansatte</span>
+        {{/link-to}}
+      {{/link-to}}
+
+      {{#link-to "avdeling" class="nav-item" tagName="li"}}
+        {{#link-to "avdeling" class="nav-link"}}
+          <i class="material-icons">group</i>
+          <span class="nav-item-name">Avdelinger</span>
+        {{/link-to}}
+      {{/link-to}}
+    </ul>
+  </nav>
+</div>
+
+<div id="nav-border"></div>
+
+{{outlet}}

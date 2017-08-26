@@ -1,0 +1,77 @@
+# Service setup for production
+version: '2'
+
+volumes:
+  postgres_data: {}
+  assets_bower: {}
+  assets_node: {}
+
+services:
+  postgres:
+    image: postgres:9.6
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=tfk
+
+  backend:
+    build:
+      context: .
+      dockerfile: ./compose/django/Dockerfile
+    command: /gunicorn.sh
+    depends_on:
+      - postgres
+    links:
+      - postgres:db
+    environment:
+      - USE_DOCKER=yes
+      - DATABASE_WAIT=yes
+      - DJANGO_SETTINGS_MODULE=settings.prod
+    env_file:
+      - .env
+
+  # Container used for generating static content and extrating them
+  backend-assets:
+    build:
+      context: .
+      dockerfile: ./compose/django/Dockerfile
+    command: /bin/true
+    volumes:
+      - ./backend/staticfiles:/app/staticfiles
+    environment:
+      - USE_DOCKER=yes
+      - DATABASE_SKIP=yes
+      - DJANGO_SETTINGS_MODULE=settings.prod
+    env_file:
+      - .env
+
+  rproxy:
+    build:
+      context: ./compose/nginx
+      dockerfile: ./Dockerfile
+    depends_on:
+      - backend
+    env_file:
+      - .env
+    links:
+      - backend
+    volumes:
+      - ./frontend/dist:/usr/share/nginx/html
+      - ./backend/staticfiles:/usr/share/nginx/backend
+    ports:
+      - "${WEB_PORT}:80"
+
+  # Container used for generating static assets, does not run anything
+  frontend:
+    build: ./compose/assets
+    volumes:
+      - ./frontend:/app
+      - assets_bower:/app/bower_components
+      - assets_node:/app/node_modules
+    tmpfs:
+      - /app/tmp
+    env_file:
+      - .env
+    command: /bin/true

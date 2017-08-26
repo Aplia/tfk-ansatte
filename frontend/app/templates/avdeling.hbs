@@ -1,0 +1,53 @@
+<div class="container">
+  <h1>Avdelinger</h1>
+  <p>Her kan du se en oversikt over (eller søke etter) alle avdelinger i Telemark fylkeskommune.</p>
+
+  {{#if isLoading}}
+    SHOW LOADING
+  {{else}}
+    NOT LOADING
+  {{/if}}
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-sm-12 col-md-10">
+        <input type="text" class="form-control is-fullwidth" placeholder="Søk etter avdeling" {{action "search" on="change"}} value={{q}} />
+      </div>
+      <div class="col-sm-4 col-md-2">
+        <button class="btn btn-primary is-fullwidth" {{action "searchButton" q}}>
+          Søk <i class="material-icons search-icon">search</i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="results">
+    {{#if q}}
+      <h1>Søket "{{q}}" ga {{model.length}} treff</h1>
+    {{/if}}
+    <div class="table table-striped">
+      <div class="tbody">
+        {{#if model}}
+          <div class="tr thead">
+            <div class="th"><strong>Avdeling</strong></div>
+          </div>
+        {{/if}}
+
+        {{#each model as |department|}}
+          {{#if department.name}}
+            <div class="tr">
+              <div class="td person">
+                {{#link-to "lookupAvdeling" department.id class="department"}}
+                  {{department.name}}
+                {{/link-to}}
+              </div>
+            </div>
+          {{/if}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{{outlet}}

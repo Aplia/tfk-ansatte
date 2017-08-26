@@ -1,0 +1,22 @@
+*.pyc
+*.DS_Store
+
+# Local settings
+/backend/backend/local_settings.py
+/backend/settings/local.py
+/backend/requirements/local.txt
+/.env
+/backend/settings/.env
+/backend/staticfiles/
+
+# Database
+/backend/backend/db.sqlite3
+
+# Virtual env
+/venv/
+
+# temp files
+._*
+
+# pycharm
+backend/.idea
