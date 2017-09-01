@@ -1,6 +1,6 @@
 <div class="container">
+  <h1>Ansatte</h1>
   <p>Her kan du søke etter ansatte og se en oversikt over alle avdelinger i Telemark fylkeskommune.</p>
-
 
   <div class="form-group">
     <div class="row">
@@ -30,7 +30,7 @@
   {{else}}
     <div id="results">
       {{#if model.people}}
-        <h1>Søket ga {{model.people.length}} treff</h1>
+        <h2>Søket ga {{model.people.length}} treff</h2>
       {{/if}}
       <div class="table table-striped">
         <div class="tbody">
