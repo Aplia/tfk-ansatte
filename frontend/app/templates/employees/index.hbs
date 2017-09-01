@@ -5,7 +5,7 @@
   <div class="form-group">
     <div class="row">
       <div class="col-sm-12 col-md-6">
-        <input type="text" class="form-control is-fullwidth" placeholder="Navn eller avdeling" {{action "search" on="change"}} value={{q}} />
+        <input id="searchbox" type="text" class="form-control is-fullwidth" placeholder="Navn eller avdeling" {{action "search" on="change"}} value={{q}} />
       </div>
       <div class="col-sm-8 col-md-4">
           <select onchange={{action "searchDepartment" value="target.value"}} class="custom-select is-fullwidth">
@@ -29,8 +29,8 @@
     {{/load-indicator}}
   {{else}}
     <div id="results">
-      {{#if q}}
-        <h1>Søket "{{q}}" ga {{model.people.length}} treff</h1>
+      {{#if model.people}}
+        <h1>Søket ga {{model.people.length}} treff</h1>
       {{/if}}
       <div class="table table-striped">
         <div class="tbody">
@@ -48,7 +48,7 @@
               <div class="td person">
                 {{#link-to "employees.employee" person class="person"}}
                   {{person.givenName}} {{person.familyName}}
-                {{/link-to}}
+                {{/link-to}}&nbsp;
               </div>
               <div class="td department">
                 {{#each person.positions as |position|}}

@@ -20,6 +20,9 @@ export default Ember.Controller.extend({
 
     searchButton(searchString) {
       this.set('q', searchString);
+      if (!searchString) {
+        Ember.$("#searchbox").focus();
+      }
     },
 
     searchDepartment(departmentId) {

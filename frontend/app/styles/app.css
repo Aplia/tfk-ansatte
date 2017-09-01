@@ -144,6 +144,10 @@ div.tbody {
   text-decoration: underline;
 }
 
+#results div.table div.td.department a:not(:first-child) {
+  margin-left: 5px;
+}
+
 #results div.table div.td.phone, #results div.table div.td.email {
   font-size: 0.9rem;
 }

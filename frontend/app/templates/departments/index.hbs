@@ -2,7 +2,6 @@
   <h1>Avdelinger</h1>
   <p>Her kan du se en oversikt over (eller søke etter) alle avdelinger i Telemark fylkeskommune.</p>
 
-
   <div class="form-group">
     <div class="row">
       <div class="col-sm-12 col-md-10">
@@ -22,8 +21,8 @@
     {{/load-indicator}}
   {{else}}
     <div id="results">
-      {{#if q}}
-        <h1>Søket "{{q}}" ga {{model.length}} treff</h1>
+      {{#if model}}
+        <h1>Fant {{model.length}} avdelinger</h1>
       {{/if}}
       <div class="table table-striped">
         <div class="tbody">
@@ -49,6 +48,5 @@
     </div>
   {{/if}}
 </div>
-
 
 {{outlet}}
