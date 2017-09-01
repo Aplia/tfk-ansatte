@@ -102,7 +102,7 @@ def deploy():
         # and then gather the files in the backend/staticfiles folder
         puts(yellow("Building Django static files"))
         run("docker-compose -f docker-compose.prod.yml build backend-assets")
-        run("docker-compose -f docker-compose.prod.yml run --rm backend-assets "
+        run("docker-compose -f docker-compose.prod.yml run --rm -e DEPLOY_ENV=production backend-assets "
             "python manage.py collectstatic --no-input")
 
         puts(yellow("Building docker images with static files"))

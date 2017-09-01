@@ -6,6 +6,12 @@ import environ
 env = environ.Env()
 env.read_env()
 
+# This is set by deploy scripts when deploying, and contains the type
+# of deployment, this is either "production" or "staging"
+# This slighly alter configurations to allow the deployment process to work properly.
+DEPLOY_ENV = env('DEPLOY_ENV', default=None)
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -110,3 +116,10 @@ DATABASES['default']['ATOMIC_REQUESTS'] = True
 # ==============================================================================
 
 CORS_ALLOW_CREDENTIALS = True
+
+
+# SENTRY ERROR LOGGING
+# ------------------------------------------------------------------------------
+DJANGO_SENTRY_DSN = env(
+    "DJANGO_SENTRY_DSN",
+    default='')
