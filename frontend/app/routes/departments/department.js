@@ -9,7 +9,10 @@ export default BaseRoute.extend({
       return this.store.findRecord(
           'department',
           params.department_id,
-          {adapterOptions: {query: {q: params.q}}},
+          {
+              reload: true,
+              adapterOptions: {query: {q: params.q}},
+          },
       );
   }
 });
