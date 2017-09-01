@@ -14,5 +14,12 @@ export default BaseRoute.extend({
                 adapterOptions: {query: {q: params.q}},
             },
         );
-    }
+    },
+
+    actions: {
+        didTransition() {
+            window.scrollTo(0, 0);
+            return true;
+        }
+    },
 });
