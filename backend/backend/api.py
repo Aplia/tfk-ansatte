@@ -29,7 +29,7 @@ class PersonPositionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Position
-        fields = ('id', 'info', 'department', )
+        fields = ('id', 'info', 'department',)
 
 
 class PersonSerializer(serializers.ModelSerializer):

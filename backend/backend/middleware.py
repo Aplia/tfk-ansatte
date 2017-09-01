@@ -8,6 +8,7 @@ class SetRemoteAddrMiddleware:
     has been set. This is mostly useful for local development in docker
     as everything goes through the nxing reverse proxy.
     """
+
     def __init__(self, get_response):
         self.get_response = get_response
 

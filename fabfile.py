@@ -1,9 +1,9 @@
 # coding=utf-8
+import json
 import os
 import shutil
-import json
-
 import sys
+
 PY2 = sys.version_info[0] == 2
 PY3 = sys.version_info[0] == 3
 
@@ -12,10 +12,10 @@ if PY3:
 else:
     from StringIO import StringIO
 from fabric.api import env, cd
-from fabric.colors import yellow, red, magenta, green
-from fabric.context_managers import lcd, hide
+from fabric.colors import yellow, red, green
+from fabric.context_managers import hide
 from fabric.decorators import task
-from fabric.operations import local, run, put
+from fabric.operations import run, put
 from fabric.utils import puts, abort
 from fabric.contrib import files
 
@@ -35,8 +35,10 @@ def load_config():
     env.path = conf['path']
     env.hosts = [conf['host']]
 
+
 # Load configuration before tasks to setup host/path
 load_config()
+
 
 @task
 def verify_remote_git_status():

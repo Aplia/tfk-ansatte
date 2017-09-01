@@ -9,9 +9,9 @@ urlpatterns = [
     url(r'^backend/admin/', admin.site.urls),
 ]
 
-
 if settings.DEBUG:
     import debug_toolbar
+
     urlpatterns += [
         url(r'^backend/__debug__/', include(debug_toolbar.urls)),
     ]

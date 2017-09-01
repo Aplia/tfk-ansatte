@@ -11,7 +11,6 @@ env.read_env()
 # This slighly alter configurations to allow the deployment process to work properly.
 DEPLOY_ENV = env('DEPLOY_ENV', default=None)
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -31,12 +30,13 @@ INTERNAL_IPS = (
 
 if env.bool('USE_DOCKER', False):
     import socket
+
     # Pass the backend docker ip, reverse proxy ip and the main docker network ip as internal ip and allowed hosts
     # This allows debug toolbar when developing with docker
     backend_ip = socket.gethostbyname(socket.gethostname())
     network_ip = '.'.join(backend_ip.split('.')[:-1] + ['1'])
-    ALLOWED_HOSTS += (backend_ip, network_ip, )
-    INTERNAL_IPS += (backend_ip, network_ip, )
+    ALLOWED_HOSTS += (backend_ip, network_ip,)
+    INTERNAL_IPS += (backend_ip, network_ip,)
 
 # Application definition
 
@@ -92,7 +92,6 @@ TEMPLATES = [
     },
 ]
 
-
 # ==============================================================================
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
@@ -100,7 +99,6 @@ TEMPLATES = [
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATIC_URL = '/backend/static/'
-
 
 # ==============================================================================
 # Database
@@ -111,13 +109,11 @@ DATABASES = {
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
-
 # ==============================================================================
 # CORS
 # ==============================================================================
 
 CORS_ALLOW_CREDENTIALS = True
-
 
 # SENTRY ERROR LOGGING
 # ------------------------------------------------------------------------------
