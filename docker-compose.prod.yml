@@ -8,6 +8,7 @@ volumes:
 
 services:
   postgres:
+    restart: always
     image: postgres:9.6
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -17,6 +18,7 @@ services:
       - POSTGRES_DB=tfk
 
   backend:
+    restart: always
     build:
       context: .
       dockerfile: ./compose/django/Dockerfile
@@ -49,6 +51,7 @@ services:
       - .env
 
   rproxy:
+    restart: always
     build:
       context: ./compose/nginx
       dockerfile: ./Dockerfile
@@ -66,6 +69,7 @@ services:
 
   # Container used for generating static assets, does not run anything
   frontend:
+    restart: always
     build: ./compose/assets
     volumes:
       - ./frontend:/app
