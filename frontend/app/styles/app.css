@@ -255,8 +255,8 @@ div.tbody {
     text-decoration: underline;
   }
 
-  #results a.person {
-    font-size: 2rem;
+  #results div.td.person a {
+    font-size: 1.6rem;
   }
 
   #results .person-details p {
