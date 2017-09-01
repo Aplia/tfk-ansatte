@@ -87,6 +87,12 @@ class DepartmentPositionSerializer(serializers.ModelSerializer):
 
 
 class DepartmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Department
+        fields = ('id', 'name')
+
+
+class DepartmentWithPositionsSerializer(serializers.ModelSerializer):
     positions = DepartmentPositionSerializer(many=True, read_only=True)
 
     class Meta:
@@ -101,7 +107,7 @@ class DepartmentViewSet(viewsets.ModelViewSet):
         * `?q`: Search name of departments (like search)
         * `/department_id/?q`: Search firstname, lastname of department employees (like search)
     """
-    queryset = Department.objects.prefetch_related('positions__person').all()
+    queryset = Department.objects.all()
     serializer_class = DepartmentSerializer
 
     def get_queryset(self):
@@ -128,7 +134,7 @@ class DepartmentViewSet(viewsets.ModelViewSet):
             )
 
         department = qs.get(pk=pk)
-        serializer = self.serializer_class(department)
+        serializer = DepartmentWithPositionsSerializer(department)
         return Response(serializer.data)
 
 
