@@ -1,4 +1,5 @@
 from django.db.models import Prefetch
+from django.shortcuts import get_object_or_404
 from rest_framework import routers, viewsets
 from rest_framework import serializers
 from rest_framework.response import Response
@@ -66,6 +67,12 @@ class PersonViewSet(viewsets.ModelViewSet):
             return qs
         else:
             return []
+
+    # Needed as we return an empty array and not a queryset from get_queryset
+    def retrieve(self, request, pk=None):
+        return Response(PersonSerializer(
+            get_object_or_404(Person, pk=pk)
+        ).data)
 
 
 # Department API
