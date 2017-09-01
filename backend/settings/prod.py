@@ -78,6 +78,7 @@ if not DEPLOY_ENV and DJANGO_SENTRY_DSN:
 
     RAVEN_CONFIG = {
         'dsn': DJANGO_SENTRY_DSN,
+        'release': env('GIT_REV', default=None),
     }
 
     # Add raven to the list of installed apps

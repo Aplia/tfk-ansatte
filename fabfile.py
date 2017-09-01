@@ -4,11 +4,12 @@ import shutil
 
 import sys
 
+from StringIO import StringIO
 from fabric.api import env, cd
 from fabric.colors import yellow, red, magenta, green
 from fabric.context_managers import lcd, hide
 from fabric.decorators import task
-from fabric.operations import local, run
+from fabric.operations import local, run, put
 from fabric.utils import puts, abort
 from fabric.contrib import files
 
@@ -93,6 +94,14 @@ def deploy():
     update_git()
 
     with cd(env.path):
+        # Store the git revision in .env-prod which will then be used by docker-compose
+        git_rev = run("git rev-parse HEAD")
+        git_rev_io = StringIO()
+        git_rev_io.write("""
+GIT_REV={git_rev}
+""".format(git_rev=git_rev).replace("\r\n", "\n"))
+        put(git_rev_io, ".env-prod")
+
         # Build the frontend first and use it for creating the ember assets files
         puts(yellow("Building frontend application"))
         run("docker-compose -f docker-compose.prod.yml build frontend")

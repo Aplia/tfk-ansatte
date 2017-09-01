@@ -31,6 +31,7 @@ services:
       - DJANGO_SETTINGS_MODULE=settings.prod
     env_file:
       - .env
+      - .env-prod
 
   # Container used for generating static content and extrating them
   backend-assets:
