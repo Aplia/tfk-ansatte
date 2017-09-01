@@ -96,7 +96,7 @@ def deploy():
         # Build the frontend first and use it for creating the ember assets files
         puts(yellow("Building frontend application"))
         run("docker-compose -f docker-compose.prod.yml build frontend")
-        run("docker-compose -f docker-compose.prod.yml run --rm frontend ember build")
+        run("docker-compose -f docker-compose.prod.yml run --rm frontend ./build.sh")
 
         # Then build the backend-assets which allow for running collectstatic
         # and then gather the files in the backend/staticfiles folder
