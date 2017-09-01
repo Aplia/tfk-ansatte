@@ -1,32 +1,32 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  queryParams: [
-    'q',
-    'departmentId',
-  ],
+    queryParams: [
+        'q',
+        'departmentId',
+    ],
 
-  departmentId: "",
+    departmentId: "",
 
-  isSelectedDepartment(department) {
-      return department.get('id') == this.get('departmentId');
-  },
-
-  actions: {
-    search() {
-      let query = event.target.value;
-      this.set('q', query);
+    isSelectedDepartment(department) {
+        return department.get('id') == this.get('departmentId');
     },
 
-    searchButton(searchString) {
-      this.set('q', searchString);
-      if (!searchString) {
-        Ember.$("#searchbox").focus();
-      }
-    },
+    actions: {
+        search() {
+            let query = event.target.value;
+            this.set('q', query);
+        },
 
-    searchDepartment(departmentId) {
-        this.set('departmentId', departmentId);
+        searchButton(searchString) {
+            this.set('q', searchString);
+            if (!searchString) {
+                Ember.$("#searchbox").focus();
+            }
+        },
+
+        searchDepartment(departmentId) {
+            this.set('departmentId', departmentId);
+        }
     }
-  }
 });

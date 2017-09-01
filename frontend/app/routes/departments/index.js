@@ -2,7 +2,7 @@ import BaseRoute from '../base';
 
 export default BaseRoute.extend({
     queryParams: {
-        q: { refreshModel: true },
+        q: {refreshModel: true},
     },
 
     model(params) {

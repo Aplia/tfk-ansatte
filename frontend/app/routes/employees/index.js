@@ -3,8 +3,8 @@ import BaseRoute from '../base';
 
 export default BaseRoute.extend({
     queryParams: {
-        q: { refreshModel: true },
-        departmentId: { refreshModel: true },
+        q: {refreshModel: true},
+        departmentId: {refreshModel: true},
     },
 
     model(params) {
