@@ -15,8 +15,8 @@ class Command(BaseCommand):
         file = options['file']
         assert os.path.exists(file), "File '%s' does not exist" % file
 
-        Person.objects.all().delete()
         Position.objects.all().delete()
+        Person.objects.all().delete()
         Department.objects.all().delete()
 
         with open(file, 'rb') as file:
@@ -31,6 +31,8 @@ class Command(BaseCommand):
                     work_phone=result['workPhone'],
                 )
                 for position in result['positions']:
+                    if not position['departmentName']:
+                        continue
                     (department, _) = Department.objects.get_or_create(
                         id=position['departmentId'],
                         name=position['departmentName']
