@@ -3,31 +3,37 @@
     <i class="material-icons">keyboard_arrow_left</i> Tilbake til ansatte
   {{/link-to}}
 
-  <div id="results">
-    <h1>{{model.givenName}} {{model.familyName}}</h1>
+  {{#if isLoading}}
+    {{#load-indicator}}
+      <p>Henter ansatt</p>
+    {{/load-indicator}}
+  {{else}}
+    <div id="results">
+      <h1>{{model.givenName}} {{model.familyName}}</h1>
 
-    {{#each model.positions as |position|}}
-      {{#link-to "departments.department" position.department}}
-        {{position.department.name}}
-      {{/link-to}}
-    {{/each}}
+      {{#each model.positions as |position|}}
+        {{#link-to "departments.department" position.department}}
+          {{position.department.name}}
+        {{/link-to}}
+      {{/each}}
 
-    <div class="phone">
-      {{#if model.workPhone}}
-        <i class="material-icons">phone</i> <a href="tel:{{model.workPhone}}">{{model.workPhone}}</a>
-      {{/if}}
+      <div class="phone">
+        {{#if model.workPhone}}
+          <i class="material-icons">phone</i> <a href="tel:{{model.workPhone}}">{{model.workPhone}}</a>
+        {{/if}}
 
-      {{#if model.mobilePhone}}
-        <i class="material-icons">phone_iphone</i> <a href="tel:{{model.mobilePhone}}">{{model.mobilePhone}}</a>
-      {{/if}}
+        {{#if model.mobilePhone}}
+          <i class="material-icons">phone_iphone</i> <a href="tel:{{model.mobilePhone}}">{{model.mobilePhone}}</a>
+        {{/if}}
+      </div>
+
+      <div class="email">
+        {{#if model.email}}
+          <i class="material-icons">email</i> <a href="mailto:{{model.email}}">{{model.email}}</a>
+        {{/if}}
+      </div>
     </div>
-
-    <div class="email">
-      {{#if model.email}}
-        <i class="material-icons">email</i> <a href="mailto:{{model.email}}">{{model.email}}</a>
-      {{/if}}
-    </div>
-  </div>
+  {{/if}}
 </div>
 
 {{outlet}}

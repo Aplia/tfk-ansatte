@@ -1,11 +1,6 @@
 <div class="container">
   <p>Her kan du søke etter ansatte og se en oversikt over alle avdelinger i Telemark fylkeskommune. Søkefeltet ligger øverst på siden.</p>
 
-  {{#if isLoading}}
-    SHOW LOADING
-  {{else}}
-    NOT LOADING
-  {{/if}}
 
   <div class="form-group">
     <div class="row">
@@ -28,6 +23,11 @@
     </div>
   </div>
 
+  {{#if isLoading}}
+    {{#load-indicator}}
+      <p>Finner ansatte</p>
+    {{/load-indicator}}
+  {{else}}
     <div id="results">
       {{#if q}}
         <h1>Søket "{{q}}" ga {{model.people.length}} treff</h1>
@@ -75,6 +75,8 @@
         </div>
       </div>
     </div>
+
+  {{/if}}
 
   {{outlet}}
 </div>

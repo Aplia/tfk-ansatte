@@ -1,7 +1,9 @@
 <div class="container">
 
   <nav class="navbar">
-    <img src="/assets/images/logo.svg" alt="Telemark fylkeskommune logo">
+    {{#link-to "employees" class="logo-anchor"}}
+      <img src="/assets/images/logo.svg" alt="Telemark fylkeskommune logo">
+    {{/link-to}}
 
     <ul class="nav-items">
       {{#link-to "employees" class="nav-item" tagName="li"}}

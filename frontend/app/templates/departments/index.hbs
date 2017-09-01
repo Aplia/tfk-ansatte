@@ -2,11 +2,6 @@
   <h1>Avdelinger</h1>
   <p>Her kan du se en oversikt over (eller søke etter) alle avdelinger i Telemark fylkeskommune.</p>
 
-  {{#if isLoading}}
-    SHOW LOADING
-  {{else}}
-    NOT LOADING
-  {{/if}}
 
   <div class="form-group">
     <div class="row">
@@ -21,32 +16,38 @@
     </div>
   </div>
 
-  <div id="results">
-    {{#if q}}
-      <h1>Søket "{{q}}" ga {{model.length}} treff</h1>
-    {{/if}}
-    <div class="table table-striped">
-      <div class="tbody">
-        {{#if model}}
-          <div class="tr thead">
-            <div class="th"><strong>Avdeling</strong></div>
-          </div>
-        {{/if}}
-
-        {{#each model as |department|}}
-          {{#if department.name}}
-            <div class="tr">
-              <div class="td person">
-                {{#link-to "departments.department" department.id class="department"}}
-                  {{department.name}}
-                {{/link-to}}
-              </div>
+  {{#if isLoading}}
+    {{#load-indicator}}
+      <p>Finner avdelinger</p>
+    {{/load-indicator}}
+  {{else}}
+    <div id="results">
+      {{#if q}}
+        <h1>Søket "{{q}}" ga {{model.length}} treff</h1>
+      {{/if}}
+      <div class="table table-striped">
+        <div class="tbody">
+          {{#if model}}
+            <div class="tr thead">
+              <div class="th"><strong>Avdeling</strong></div>
             </div>
           {{/if}}
-        {{/each}}
+
+          {{#each model as |department|}}
+            {{#if department.name}}
+              <div class="tr">
+                <div class="td person">
+                  {{#link-to "departments.department" department.id class="department"}}
+                    {{department.name}}
+                  {{/link-to}}
+                </div>
+              </div>
+            {{/if}}
+          {{/each}}
+        </div>
       </div>
     </div>
-  </div>
+  {{/if}}
 </div>
 
 

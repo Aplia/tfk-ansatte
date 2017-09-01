@@ -13,48 +13,48 @@
       </div>
     </div>
   </div>
+  {{#if isLoading}}
+    {{#load-indicator}}
+      <p>Henter ansatte</p>
+    {{/load-indicator}}
+  {{else}}
+    <div id="results">
+      <h2>Ansatte ({{model.positions.length}})</h2>
+      <div class="table table-striped">
+        <div class="tbody">
 
-  <div id="results">
-    <h2>Ansatte ({{model.positions.length}})</h2>
-    <div class="table table-striped">
-      <div class="tbody">
-
-        <div class="tr thead">
-          <div class="th"><strong>Navn</strong></div>
-          <div class="th"><strong>Telefon</strong></div>
-          <div class="th"><strong>Epost</strong></div>
-        </div>
-
-        {{#each model.positions as |position|}}
-          <div class="tr">
-            <div class="td person">
-              {{#link-to "employees.employee" position.person class="position.person"}}
-                {{position.person.givenName}} {{position.person.familyName}}
-              {{/link-to}}
-            </div>
-            <div class="td phone">
-              {{#if position.person.workPhone}}
-                <i class="material-icons">phone</i> <a href="tel:{{position.person.workPhone}}">{{position.person.workPhone}}</a>
-              {{/if}}
-              {{#if position.person.mobilePhone}}
-                <i class="material-icons">phone_iphone</i> <a href="tel:{{position.person.mobilePhone}}">{{position.person.mobilePhone}}</a>
-              {{/if}}
-            </div>
-            <div class="td email">
-              {{#if position.person.email}}
-                <i class="material-icons">email</i> <a href="mailto:{{position.person.email}}">{{position.person.email}}</a>
-              {{/if}}
-            </div>
+          <div class="tr thead">
+            <div class="th"><strong>Navn</strong></div>
+            <div class="th"><strong>Telefon</strong></div>
+            <div class="th"><strong>Epost</strong></div>
           </div>
-        {{/each}}
+
+          {{#each model.positions as |position|}}
+            <div class="tr">
+              <div class="td person">
+                {{#link-to "employees.employee" position.person class="position.person"}}
+                  {{position.person.givenName}} {{position.person.familyName}}
+                {{/link-to}}
+              </div>
+              <div class="td phone">
+                {{#if position.person.workPhone}}
+                  <i class="material-icons">phone</i> <a href="tel:{{position.person.workPhone}}">{{position.person.workPhone}}</a>
+                {{/if}}
+                {{#if position.person.mobilePhone}}
+                  <i class="material-icons">phone_iphone</i> <a href="tel:{{position.person.mobilePhone}}">{{position.person.mobilePhone}}</a>
+                {{/if}}
+              </div>
+              <div class="td email">
+                {{#if position.person.email}}
+                  <i class="material-icons">email</i> <a href="mailto:{{position.person.email}}">{{position.person.email}}</a>
+                {{/if}}
+              </div>
+            </div>
+          {{/each}}
+        </div>
       </div>
     </div>
-  </div>
-
-  {{outlet}}
+  {{/if}}
 </div>
-
-
-
 
 {{outlet}}
