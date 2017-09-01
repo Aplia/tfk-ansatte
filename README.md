@@ -61,7 +61,7 @@ docker-compose run --rm backend python manage.py import_data ansatte.json
 
 Litt informasjon om docker imagene som er brukt.
 
-### django ###
+### Django ###
 
 Docker image som er basert på Python men som starter Django applikasjonen via
 `start-dev.sh` skriptet, dette skriptet sørger for å migrere databasen og vil håndtere feil
@@ -71,13 +71,13 @@ og prøver å restarte applikasjonen hvis dette skjer.
 
 Det er også et oppsett for produksjon hvor `gunicorn` er brukt.
 
-### nginx ###
+### Nginx ###
 
 Docker image basert på offisiell nginx men som integrerer `envplate`, dette
 gjør det mulig å bruke environment variabler i konfigen.
 
 
-### assets ###
+### Assets ###
 
 Docker image basert på nodejs, som integrer yarn, watchman, bower, livereload
 og nodemon.
@@ -86,21 +86,21 @@ yarn erstatter npm for installasjon av pakker, og nodemon brukes for å starte
 og restarte ember serveren når hovedkonfigurasjon er endret. Dette gjør
 utviklingsjobben en del enklere.
 
-### postgres ### 
+### Postgres ###
 
 Offisielt image brukes men er konfigurert for lokalt utvikling.
 
 
 ### docker-compose ###
 
-Fila docker-compose.yml brukes til lokal utvikling 
+Fila docker-compose.yml brukes til lokal utvikling
 
 
 ### Porter ###
 
 Docker oppsettet eksponerer to porter (settes i `.env`), `WEB_PORT` er porten
 for reverse proxy som er den man bruker til vanlig. `APP_PORT` er porten
-direkte mot Django backend, trengs normalt ikke men kan brukes for 
+direkte mot Django backend, trengs normalt ikke men kan brukes for
 
 Livereload er konfigurert slik at alt går igjennom `WEB_PORT`, dette gjør
 det også enkelt å ta bruk tjenester som ngrok slik at man kan få hele
@@ -110,3 +110,19 @@ oppsettet gjennom et domene og SSL.
 
 API'et ligger i backend og leveres via pathen `/backend/api`, koden
 for dette ligger i `backend/backend/api.py` og er laget i Django Rest Framework.
+
+All søk i APIet er case insensitive og bruker et enkelt SQL `like` søk.
+
+Følgende API punkter er tilgjenglig:
+
+- `/backend/api/people?q=<search>` – Søk etter personer på fornavn/etternavn.
+- `/backend/api/people?department_id=<department>` – Hent alle personer i en bestemt avdeling.
+- `/backend/api/people?department_id=<department>&q=<search>` – Søk etter personer i en bestemt avdeling.
+- `/backend/api/people/id` – Hent en spesifikk person etter id
+- `/backend/api/departments` – Hent ut alle avdelinger
+- `/backend/api/departments?q=<search>` – Søk etter avdeling på avdelingsnavn
+- `/backend/api/departments/id` - Hent en spesifikk avdeling etter id og alle relaterte personer.
+- `/backend/api/departments/id?q=<search>` – Søk etter personer på fornavn/etternavn i en spesifikk avdeling.
+
+Django Rest Framework sin interaktive api browser er tilgjenglig på
+`/backend/api`.

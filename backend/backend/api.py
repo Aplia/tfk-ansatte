@@ -46,8 +46,8 @@ class PersonViewSet(viewsets.ModelViewSet):
     """ API endpoint for Persons
 
     Available paramters:
-        * `?q`: Search firstname and lastname (like search)
-        * `?department_id`: List or search firstname/lastname a specific department
+        * `?q`: Search people by name
+        * `?department_id=`: List or search people by a specific department
     """
     queryset = Person.objects.prefetch_related('positions__department').all()
     serializer_class = PersonSerializer
@@ -104,8 +104,8 @@ class DepartmentViewSet(viewsets.ModelViewSet):
     """ API endpoint for Departments
 
     Available paramters:
-        * `?q`: Search name of departments (like search)
-        * `/department_id/?q`: Search firstname, lastname of department employees (like search)
+        * `?q`: Search departments by name
+        * `/id/?q`: Search department employees by name
     """
     queryset = Department.objects.all()
     serializer_class = DepartmentSerializer
