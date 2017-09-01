@@ -47,12 +47,12 @@
             <div class="tr">
               <div class="td person">
                 {{#link-to "employees.employee" person class="person"}}
-                  {{person.givenName}} {{person.familyname}}
+                  {{person.givenName}} {{person.familyName}}
                 {{/link-to}}
               </div>
               <div class="td department">
                 {{#each person.positions as |position|}}
-                  {{#link-to "departments.department" position.department}}
+                  {{#link-to "departments.department" position.department.id}}
                     {{position.department.name}}
                   {{/link-to}}
                 {{/each}}

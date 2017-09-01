@@ -1,7 +1,7 @@
 <div class="container">
-  {{#link-to "employees" class="btn btn-primary"}}
-    <i class="material-icons">keyboard_arrow_left</i> Tilbake til ansatte
-  {{/link-to}}
+  <a {{action "goBack"}} class="btn btn-primary back-button">
+    <i class="material-icons">keyboard_arrow_left</i> Tilbake til søk
+  </a>
 
   {{#if isLoading}}
     {{#load-indicator}}
@@ -11,12 +11,18 @@
     <div id="results">
       <h1>{{model.givenName}} {{model.familyName}}</h1>
 
-      {{#each model.positions as |position|}}
-        {{#link-to "departments.department" position.department}}
-          {{position.department.name}}
-        {{/link-to}}
-      {{/each}}
+      <h4>Ansatt ved</h4>
+      <ul class="departments">
+        {{#each model.positions as |position|}}
+          <li>
+            {{#link-to "departments.department" position.department}}
+              {{position.department.name}}
+            {{/link-to}}
+          </li>
+        {{/each}}
+      </ul>
 
+      <h4>Kontakt</h4>
       <div class="phone">
         {{#if model.workPhone}}
           <i class="material-icons">phone</i> <a href="tel:{{model.workPhone}}">{{model.workPhone}}</a>

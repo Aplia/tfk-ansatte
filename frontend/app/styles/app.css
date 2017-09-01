@@ -139,7 +139,7 @@ div.tbody {
   background-color: #fff;
 }
 
-#results div.table div.td a {
+#results a {
   color: #007f7a;
   text-decoration: underline;
 }
@@ -150,6 +150,28 @@ div.tbody {
 
 #results div.table div.td i.material-icons {
   font-size: 1rem;
+}
+
+#results .email, #results .phone {
+  font-size: 1.1rem;
+}
+
+#results .email i.material-icons, #results .phone i.material-icons {
+  position: relative;
+  top: 5px;
+}
+
+#results ul.departments {
+  list-style: none;
+  padding-left: 0;
+}
+
+#results ul.departments li a {
+  font-size: 1.2rem;
+}
+
+.back-button {
+  margin-bottom: 15px;
 }
 
 /* Helperclasses */
