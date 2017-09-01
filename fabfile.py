@@ -1,6 +1,7 @@
 # coding=utf-8
 import os
 import shutil
+import json
 
 import sys
 PY2 = sys.version_info[0] == 2
@@ -21,6 +22,21 @@ from fabric.contrib import files
 env.forward_agent = True
 env.branch = "master"
 
+
+def load_config():
+    if not os.path.exists(".fabfile.conf"):
+        abort(red("No .fabfile.conf file found, this is need for configuration of host/path"))
+
+    conf = json.load(open(".fabfile.conf"))
+    if 'path' not in conf:
+        abort(red("Missing configuration 'path'"))
+    if 'host' not in conf:
+        abort(red("Missing configuration 'host'"))
+    env.path = conf['path']
+    env.hosts = [conf['host']]
+
+# Load configuration before tasks to setup host/path
+load_config()
 
 @task
 def verify_remote_git_status():
@@ -94,6 +110,7 @@ def diffchanges():
 
 @task
 def deploy():
+    """ Deploy changes to production server """
     puts(u"Deploying in path {}".format(green(env.path)))
     verify_remote_git_status()
     update_git()

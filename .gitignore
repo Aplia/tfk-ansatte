@@ -10,6 +10,7 @@
 /.env-prod
 /backend/settings/.env
 /backend/staticfiles/
+/.fabfile.conf
 
 # Database
 /backend/backend/db.sqlite3
