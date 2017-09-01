@@ -3,8 +3,13 @@ import os
 import shutil
 
 import sys
+PY2 = sys.version_info[0] == 2
+PY3 = sys.version_info[0] == 3
 
-from StringIO import StringIO
+if PY3:
+    from io import StringIO
+else:
+    from StringIO import StringIO
 from fabric.api import env, cd
 from fabric.colors import yellow, red, magenta, green
 from fabric.context_managers import lcd, hide
