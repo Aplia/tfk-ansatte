@@ -46,13 +46,13 @@
           {{#each model.people as |person|}}
             <div class="tr">
               <div class="td person">
-                {{#link-to "lookupAnsatt" person class="person"}}
+                {{#link-to "employees.employee" person class="person"}}
                   {{person.givenName}} {{person.familyname}}
                 {{/link-to}}
               </div>
               <div class="td department">
                 {{#each person.positions as |position|}}
-                  {{#link-to "lookupAvdeling" position.department}}
+                  {{#link-to "departments.department" position.department}}
                     {{position.department.name}}
                   {{/link-to}}
                 {{/each}}

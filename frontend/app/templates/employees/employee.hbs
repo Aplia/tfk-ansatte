@@ -1,5 +1,5 @@
 <div class="container">
-  {{#link-to "search" class="btn btn-primary"}}
+  {{#link-to "employees" class="btn btn-primary"}}
     <i class="material-icons">keyboard_arrow_left</i> Tilbake til ansatte
   {{/link-to}}
 
@@ -7,7 +7,7 @@
     <h1>{{model.givenName}} {{model.familyName}}</h1>
 
     {{#each model.positions as |position|}}
-      {{#link-to "lookupAvdeling" position.department}}
+      {{#link-to "departments.department" position.department}}
         {{position.department.name}}
       {{/link-to}}
     {{/each}}

@@ -7,10 +7,12 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('search', {path: '/'});
-  this.route('avdeling');
-  this.route('lookupAnsatt', {path: '/ansatt/:person_id'});
-  this.route('lookupAvdeling', {path: '/avdeling/:department_id'});
+  this.route('employees', {path: '/'}, function() {
+    this.route('employee', {path: '/ansatt/:person_id'});
+  });
+  this.route('departments', {path: '/avdelinger'}, function() {
+    this.route('department', {path: '/avdelinger/:department_id'});
+  });
 });
 
 export default Router;

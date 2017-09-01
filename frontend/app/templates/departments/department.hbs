@@ -28,7 +28,7 @@
         {{#each model.positions as |position|}}
           <div class="tr">
             <div class="td person">
-              {{#link-to "lookupAnsatt" position.person class="position.person"}}
+              {{#link-to "employees.employee" position.person class="position.person"}}
                 {{position.person.givenName}} {{position.person.familyName}}
               {{/link-to}}
             </div>
