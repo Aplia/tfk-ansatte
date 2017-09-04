@@ -24,6 +24,8 @@ module.exports = function (environment) {
         }
     };
 
+    ENV.APP.API_HOST = '/backend/api';
+    ENV.APP.API_NAMESPACE = '';
 
     if (environment === 'development') {
         // ENV.APP.LOG_RESOLVER = true;
@@ -31,8 +33,6 @@ module.exports = function (environment) {
         // ENV.APP.LOG_TRANSITIONS = true;
         // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
         // ENV.APP.LOG_VIEW_LOOKUPS = true;
-        ENV.APP.API_HOST = '/backend/api';
-        ENV.APP.API_NAMESPACE = '';
     }
 
     if (environment === 'test') {

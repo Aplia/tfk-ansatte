@@ -139,7 +139,7 @@ GIT_REV={git_rev}
             "python manage.py collectstatic --no-input")
 
         puts(yellow("Building docker images with static files"))
-        run("docker-compose -f docker-compose.prod.yml build --environment=production")
+        run("docker-compose -f docker-compose.prod.yml build")
 
         puts(yellow("Migrating database"))
         run("docker-compose -f docker-compose.prod.yml run --rm backend python manage.py migrate")
